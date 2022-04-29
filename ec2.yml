@@ -1,0 +1,19 @@
+Resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+     SecurityGroups:
+       - !Ref InstanceSecurityGroup
+     KeyName: udacityTasks
+     ImageId: 'ami-000722651477bd39b' 
+     InstanceType: t2.micro
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH access via port 2
+      SecurityGroupIngress:
+         - IpProtocol: tcp
+           FromPort: '22'
+           ToPort: '22'
+           CidrIp: 0.0.0.0/0 
+
