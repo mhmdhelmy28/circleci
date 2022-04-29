@@ -2,7 +2,7 @@
 version: 2.1
 
 jobs:
-  say-hello:
+  create-infra:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -18,4 +18,4 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - ceate-infra
+      - create-infra
