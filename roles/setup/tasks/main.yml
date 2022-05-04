@@ -21,7 +21,7 @@
 
 
 - name: Install pm2 globally
-  community.general.npm:
+  npm:
     name: pm2
     global: yes
     production: yes
@@ -30,14 +30,15 @@
 
 
 - name: Create a directory if it does not exist
-  ansible.builtin.file:
+  file:
     path: ~/web
     state: directory
 
 - name: Copy index.js file to ec2
-  ansible.builtin.copy:
+  template:
     src: "files/index.js"
     dest: "~/web/index.js"
 
 - name: run web server 
-  ansible.builtin.shell: pm2 start ~/web/index.js -f
+  shell: | 
+    pm2 start ~/web/index.js -f
