@@ -1,8 +1,0 @@
-- name: Configuring EC2
-  hosts: ec2
-  user: ubuntu
-  become: true
-  become_method: sudo
-  become_user: root
-  roles:
-  - setup
