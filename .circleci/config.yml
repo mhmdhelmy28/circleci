@@ -1,4 +1,3 @@
-
 version: 2.1
 
 jobs:
@@ -13,6 +12,7 @@ jobs:
       - run:
           name: "install ansible"
           command: |
+<<<<<<< HEAD
                   apk add --update ansible
       - run:
           name: "Configure server"
@@ -23,3 +23,13 @@ workflows:
   say-hello-workflow:
     jobs:
       - configure-infra
+=======
+              aws cloudformation deploy \
+                --template-file ec2.yml \
+                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+                --region us-east-1
+workflows:
+  say-hello-workflow:
+    jobs:
+      - create-infra
+>>>>>>> 80b7804fceb2509f6940b8e003b9c7c405096dd1
