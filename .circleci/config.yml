@@ -1,19 +1,22 @@
 version: 2.1
 
 jobs:
-    create-infra: 
+   configure-infra: 
       docker:
-        - image: amazon/aws-cli
+        - image: python:3.7-alpine3.11
       steps:
         - checkout
+        - add_ssh_keys:
+           fingerprints: ["5c:81:b9:e8:60:b2:22:32:12:69:7c:fe:05:b3:da:9e"]
         - run:
-            name: Create Cloudformation Stack
+            name: Install dependencies
             command: |
-                aws cloudformation deploy \
-                --template-file ec2.yml \
-                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-                --region us-east-1
+              apk add --update ansible 
+        - run:
+            name: Configure server
+            command: |
+              ansible-playbook -i inventory.yml main-playbook.yml
 workflows:
   say-hello-workflow:
     jobs:
-      - create-infra
+      - configure-infra
