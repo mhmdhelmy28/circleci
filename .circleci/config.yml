@@ -21,4 +21,4 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - create-infra
+      - configure-infra
